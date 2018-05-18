@@ -4,7 +4,7 @@ import './App.css';
 class Ask extends React.Component {
     render() {
         return (
-            <div class="content">
+            <div>
                 <form class="form-narrow form-horizontal" method="post" action="@{ask}">
                     <fieldset>
                         <legend>Enter new question</legend>
