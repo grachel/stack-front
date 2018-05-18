@@ -6,6 +6,7 @@ import App from './App';
 import Ask from './Ask';
 import registerServiceWorker from './registerServiceWorker';
 import Header from './Header';
+import Footer from './Footer';
 
 ReactDOM.render((
     <div>
@@ -16,6 +17,7 @@ ReactDOM.render((
                 <Route path='/ask' component={Ask} />
             </div>
         </BrowserRouter>
+        <Footer />
     </div>
 ), document.getElementById('root')
 );
