@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Ask from './Ask';
@@ -13,8 +13,10 @@ ReactDOM.render((
         <Header />
         <BrowserRouter>
             <div>
-                <Route path='/' component={App} />
-                <Route path='/ask' component={Ask} />
+                <Switch>
+                    <Route path='/ask' component={Ask} />
+                    <Route path='/' component={App} />
+                </Switch>
             </div>
         </BrowserRouter>
         <Footer />
