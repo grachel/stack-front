@@ -12,15 +12,15 @@ class Header extends React.Component {
 
     render() {
         return (
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
+            <nav className="navbar navbar-inverse navbar-fixed-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Stack Application</a>
+                        <a className="navbar-brand" href="">Stack Application</a>
                     </div>
                     <HeaderAuthorized isLoggedIn={this.state.isLoggedIn} name={this.state.name} />
                 </div>
@@ -34,13 +34,13 @@ function HeaderAuthorized(props) {
     const name = props.name;
     if (isLoggedIn) {
         return (
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+            <div className="navbar-collapse collapse">
+                <ul className="nav navbar-nav">
                     <li><a href="/" >Home</a></li>
                     <li><a href="/ask">Ask</a></li>
-                    <li><a href="#" onClick={myPostsClicked}>My questions</a></li>
+                    <li><a href="/my" onClick={myPostsClicked}>My questions</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul className="nav navbar-nav navbar-right">
                     <li><a>Welcome {name}! </a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>

@@ -101,3 +101,26 @@ textarea.post {
   width: 60%;
   margin-left: 15%;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'main main main main main main'
+    'x x x x right right';
+  grid-gap: 1px;
+  padding: 3px;
+}
+.grid-container > div {
+  padding: 20px 0;
+}
+
+.main-row { 
+  grid-area: main;  
+  text-align: left;
+  font-size: large;
+}
+.sub-row { 
+  grid-area: right; 
+  text-align: right;
+  font-size: small;
+}
