@@ -8,6 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Header from './Header';
 import Footer from './Footer';
 import Post from './Post';
+import MyPosts from './MyPosts';
 
 ReactDOM.render((
     <div>
@@ -15,6 +16,7 @@ ReactDOM.render((
         <BrowserRouter>
             <div>
                 <Switch>
+                    <Route path='/my' component={MyPosts} />
                     <Route path='/post/:id' component={Post} />
                     <Route path='/ask' component={Ask} />
                     <Route path='/' component={App} />

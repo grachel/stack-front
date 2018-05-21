@@ -38,7 +38,7 @@ function HeaderAuthorized(props) {
                 <ul className="nav navbar-nav">
                     <li><a href="/" >Home</a></li>
                     <li><a href="/ask">Ask</a></li>
-                    <li><a href="/my" onClick={myPostsClicked}>My questions</a></li>
+                    <li><a href="/my">My questions</a></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                     <li><a>Welcome {name}! </a></li>
@@ -49,10 +49,6 @@ function HeaderAuthorized(props) {
     }
 
     return "";
-}
-
-function myPostsClicked(e) {
-    e.preventDefault();
 }
 
 export default Header;

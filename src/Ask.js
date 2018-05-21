@@ -1,8 +1,24 @@
 import React from 'react';
 import './App.css';
 import $ from 'jquery';
+import { withRouter } from "react-router-dom";
 
 class Ask extends React.Component {
+
+    askClicked(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/post/ask",
+            async: false,
+            data: $.param({ title: $('#title').val(), body: $('#body').val(), tags: $('#tags').val() }),
+            success: function (result) {
+                window.location = 'my';
+            }
+        })
+    }
+
     render() {
         return (
             <div>
@@ -19,7 +35,7 @@ class Ask extends React.Component {
                         <TextArea desc="Tags (space separated)" name="tags" />
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button type="submit" class="btn btn-default" onClick={askClicked}>Submit!</button>
+                                <button type="submit" class="btn btn-default" onClick={this.askClicked}>Submit!</button>
                             </div>
                         </div>
                     </fieldset>
@@ -40,13 +56,4 @@ function TextArea(props) {
     );
 }
 
-function askClicked(e) {
-    e.preventDefault();
-
-    $.post('http://localhost:8080/post/ask', { title: $('#title').val(), body: $('#body').val(), tags: $('#tags').val() },
-        function (returnedData) {
-            console.log(returnedData);
-        });
-}
-
-export default Ask;
+export default withRouter(Ask);
