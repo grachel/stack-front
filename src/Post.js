@@ -29,7 +29,7 @@ class Post extends React.Component {
                 <span class="title">{this.state.post.title}</span>
 
                 <MainPost obj={this.state.post} />
-                <CommentSection obj={this.state.post} act="/comment/post" name="postid" />
+                <CommentSection obj={this.state.post} act="/comment/post" />
 
                 <div id="answers">
                     {
@@ -37,14 +37,14 @@ class Post extends React.Component {
                             return (
                                 <div>
                                     <Answer obj={answer} />
-                                    <CommentSection obj={answer} act="/comment/answer" name="answerid" />
+                                    <CommentSection obj={answer} act="/comment/answer" />
                                 </div>
                             )
                         })
                     }
                 </div>
 
-                <SumbitAnswer obj={this.state.post} />
+                <SumbitAnswer obj={this.state.post}/>
             </div >
         );
     }
@@ -54,15 +54,29 @@ function SumbitAnswer(params) {
     return (
         <div id="subAnswer">
             <h4>Sumbit an answer:</h4>
-            <form role="form" action="/answer" method="post">
+            <form role="form">
                 <div class="form-group">
-                    <input type="hidden" name="postid" value={params.obj.id} />
-                    <textarea class="form-control" rows="3" required="required" name="body"></textarea>
+                    <input type="hidden" id="postid" value={params.obj.id} />
+                    <textarea class="form-control" rows="3" required="required" id="newAnswerBody" name="body"></textarea>
                 </div>
-                <button type="submit" class="postBtn btn btn-success">Submit</button>
+                <button type="submit" class="postBtn btn btn-success" onClick={sumbitAnswerClicked}>Submit</button>
             </form>
         </div>
     );
+}
+
+function sumbitAnswerClicked(e) {
+    e.preventDefault();
+    
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/answer",
+        async: false,
+        data: $.param({ postid: $('#postid').val(), body: $('#newAnswerBody').val() }),
+        success: function (result) {
+            window.location = '/post/' + $('#postid').val();
+        }
+    })
 }
 
 function MainPost(params) {
@@ -108,29 +122,46 @@ function CommentSection(params) {
             </table >
 
             <h4>Leave a Comment:</h4>
-            <form role="form" action={params.act} method="post">
+            <form role="form">
                 <div class="form-group">
-                    <input type="hidden" name={params.name} value={params.obj.id} />
+                    <input type="hidden" name="id" value={params.obj.id} />
                     <textarea class="form-control" rows="3" required="required" name="body"></textarea>
                 </div>
-                <button type="submit" class="commBtn btn btn-success">Submit</button>
+                <button type="submit" class="commBtn btn btn-success" action={params.act} onClick={sumbitCommentClicked}>Submit</button>
             </form>
         </div >
     );
 }
 
+function sumbitCommentClicked(e) {
+    e.preventDefault();
+    var url = e.target.attributes['action'].nodeValue;
+    var parent  = e.target.parentNode;
+    var input = parent.getElementsByTagName('input')[0].value;
+    var commentBody = parent.getElementsByTagName('textarea')[0].value;
 
-function formatDate(timestamp){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/" + url,
+        async: false,
+        data: $.param({ id: input, body: commentBody }),
+        success: function (result) {
+            window.location = '/post/' + $('#postid').val();
+        }
+    })
+}
+
+function formatDate(timestamp) {
     return new Date(timestamp).toLocaleString();
 }
 
-function voteClicked(e){
+function voteClicked(e) {
     var element = e.target;
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/" + element.attributes['data-type'].nodeValue + "/vote",
         dataType: "json",
-        data: {id: element.attributes['id'].nodeValue },
+        data: { id: element.attributes['id'].nodeValue },
         success: function (response) {
            element.innerHTML = response;
         }

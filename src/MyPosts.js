@@ -31,6 +31,7 @@ class MyPosts extends React.Component {
                             return (
                                 <tr>
                                     <td><a href={"/post/" + post.id}>{post.title}</a></td>
+                                    <td>{post.body}</td>
                                 </tr>
                             )
                         })
