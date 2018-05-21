@@ -68,7 +68,7 @@ function SumbitAnswer(params) {
 function MainPost(params) {
     return (
         <div class="post">
-            <a class="vote postUp glyphicon glyphicon-chevron-up" data-type="post" id={params.obj.id}>{params.obj.score}</a>
+            <a class="vote postUp glyphicon glyphicon-chevron-up" data-type="post" id={params.obj.id} onClick={voteClicked}>{params.obj.score}</a>
             <textarea class="post" readonly="readonly">{params.obj.body}</textarea>
             <span class="datetime">Posted by {params.obj.user}, {formatDate(params.obj.creationDate)}.</span>
         </div>
@@ -78,7 +78,7 @@ function MainPost(params) {
 function Answer(params) {
     return (
         <div class="post">
-            <a id={params.obj.id} data-type="answer" class="vote answUp glyphicon glyphicon-chevron-up">{params.obj.score}</a>
+            <a id={params.obj.id} data-type="answer" onClick={voteClicked} class="vote answUp glyphicon glyphicon-chevron-up">{params.obj.score}</a>
             <textarea class="post" readonly="readonly">{params.obj.body}</textarea>
             <span class="datetime">Posted by {params.obj.user}, {formatDate(params.obj.creationDate)}.</span>
         </div>
@@ -96,7 +96,7 @@ function CommentSection(params) {
                             return (
                                 <tr>
                                     <td>
-                                        <a id={comment.id} data-type="comment" class="vote commUp glyphicon glyphicon-chevron-up">{comment.score}</a>
+                                        <a id={comment.id} data-type="comment" onClick={voteClicked} class="vote commUp glyphicon glyphicon-chevron-up">{comment.score}</a>
                                     </td>
                                     <td >{comment.body} - {comment.user}, on {formatDate(params.obj.creationDate)}</td>
                                 </tr>
@@ -122,6 +122,19 @@ function CommentSection(params) {
 
 function formatDate(timestamp){
     return new Date(timestamp).toLocaleString();
+}
+
+function voteClicked(e){
+    var element = e.target;
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/" + element.attributes['data-type'].nodeValue + "/vote",
+        dataType: "json",
+        data: {id: element.attributes['id'].nodeValue },
+        success: function (response) {
+           element.innerHTML = response;
+        }
+    });
 }
 
 export default Post;
