@@ -7,6 +7,7 @@ import Ask from './Ask';
 import registerServiceWorker from './registerServiceWorker';
 import Header from './Header';
 import Footer from './Footer';
+import Post from './Post';
 
 ReactDOM.render((
     <div>
@@ -14,6 +15,7 @@ ReactDOM.render((
         <BrowserRouter>
             <div>
                 <Switch>
+                    <Route path='/post/:id' component={Post} />
                     <Route path='/ask' component={Ask} />
                     <Route path='/' component={App} />
                 </Switch>
