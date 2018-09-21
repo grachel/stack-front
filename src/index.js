@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import './index.css';
-import App from './App';
-import Ask from './Ask';
+import App from './containers/app/App';
+import Ask from './containers/ask/Ask';
 import registerServiceWorker from './registerServiceWorker';
-import Header from './Header';
-import Footer from './Footer';
-import Post from './Post';
-import MyPosts from './MyPosts';
+import Header from './containers/header/Header';
+import Footer from './containers/footer/Footer';
+import Post from './containers/post/Post';
+import MyPosts from './containers/posts/MyPosts';
 
 ReactDOM.render((
     <div>

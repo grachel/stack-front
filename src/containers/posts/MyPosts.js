@@ -1,6 +1,6 @@
 import React from 'react';
-import $ from 'jquery'
-import './App.css';
+import $ from 'jquery';
+import '../../App.css';
 
 class MyPosts extends React.Component {
     constructor() {
