@@ -9,6 +9,7 @@ import Header from './containers/header/Header';
 import Footer from './containers/footer/Footer';
 import Post from './containers/post/Post';
 import MyPosts from './containers/posts/MyPosts';
+import Home from './containers/home/Home';
 
 ReactDOM.render((
     <div>
@@ -16,9 +17,10 @@ ReactDOM.render((
         <BrowserRouter>
             <div>
                 <Switch>
-                    <Route path='/my' component={MyPosts} />
-                    <Route path='/post/:id' component={Post} />
-                    <Route path='/ask' component={Ask} />
+                    <PrivateRoute path='/my' component={MyPosts} />
+                    <PrivateRoute path='/post/:id' component={Post} />
+                    <PrivateRoute path='/ask' component={Ask} />
+                    <PrivateRoute path='/home' component={Home} />
                     <Route path='/' component={App} />
                 </Switch>
             </div>
@@ -27,4 +29,13 @@ ReactDOM.render((
     </div>
 ), document.getElementById('root')
 );
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      fakeAuth.isAuthenticated === true
+        ? <Component {...props} />
+        : <Redirect to='/login' />
+    )} />
+  )
+
 registerServiceWorker();
