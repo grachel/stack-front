@@ -1,11 +1,11 @@
 import React from 'react';
-import Home from '../home/Home';
-import Auth from '../../security/auth';
-import Login from '../login/Login';
+import Home from './Home';
+import Auth from '../security/auth';
+import Login from './Login';
 import {Grid} from 'react-bootstrap';
-import {SERVER_URL} from '../../config';
-import {defaultErrorHandler} from '../../handlers/errorHandlers';
-import {checkResponseStatus, loginResponseHandler} from '../../handlers/responseHandlers';
+import {SERVER_URL} from '../config';
+import {defaultErrorHandler} from '../handlers/errorHandlers';
+import {checkResponseStatus, loginResponseHandler} from '../handlers/responseHandlers';
 
 class App extends React.Component {
 
